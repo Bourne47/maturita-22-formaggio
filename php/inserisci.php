@@ -12,8 +12,8 @@ if (isset($_POST["inserisci"]) && $_POST["inserisci"] == "ok") {
 
     $stmt_forme = $conn->prepare("UPDATE forme SET id_v = ? WHERE id_f = ?");
     foreach ($_POST["forma"] as $id_forma) {
-        $stmt_update->bind_param("ii", $id_v, $id_forma);
-        $stmt_update->execute();
+        $stmt_forme->bind_param("ii", $id_v, $id_forma);
+        $stmt_forme->execute();
     }
     $conn->close();
     header("Location: ../home.php?msg=Dati vendita inseriti con successo");
