@@ -15,7 +15,7 @@ if ($stmt->execute()){
     $stmt->execute();
 	$result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $id_t = $row['id_t']
+    $id_t = $row['id_t'];
     $stmt = $conn->prepare("UPDATE CASEIFICI
                     SET id_t = ?
                     WHERE id_c = ?"); //modifico il titolare del caseificio al quale ho fatto l'accesso

@@ -11,28 +11,39 @@ $result = $stmt->get_result();
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 $conn->close();
 ?>
-<a href="./home.php">home</a>
-<?php
-if (empty($rows)) {
-    echo "<h3>Non ci sono vendite</h3>";
-} else {
-    echo"
-    <table>
-        <tr>
-            <th class=\"cella\">data vendita</th>
-            <th class=\"cella\">nome</th>
-            <th class=\"cella\">tipo aquirente</th>
-        </tr>
-    ";
-    foreach ($rows as $row) {
-        echo " <tr>
-            <td class=\"cella\">".$row["v.data_v"]."</td>
-            <td class=\"cella\">".$row["v.nome"]."</td>
-            <td class=\"cella\">".$row["v.tipo_acq"]."</td>
-        </tr>";
+
+<div class="container mt-5">
+    <div class="mb-4">
+        <a href="./home.php" class="btn btn-secondary">Ritorna alla Home</a>
+    </div>
+
+    <h2 class="text-center mb-4">Vendite</h2>
+
+    <?php
+    if (empty($rows)) {
+        echo "<h3 class='text-center text-danger'>Non ci sono vendite</h3>";
+    } else {
+        echo "<table class='table table-striped'>
+            <thead>
+                <tr>
+                    <th>Data Vendita</th>
+                    <th>Nome</th>
+                    <th>Tipo Acquirente</th>
+                </tr>
+            </thead>
+            <tbody>";
+        
+        foreach ($rows as $row) {
+            echo "<tr>
+                <td>".$row["v.data_v"]."</td>
+                <td>".$row["v.nome"]."</td>
+                <td>".$row["v.tipo_acq"]."</td>
+            </tr>";
+        }
+
+        echo "</tbody></table>";
     }
-    echo "</table>";
-}
-?>
-</body>
-</html>
+    ?>
+</div>
+
+<?php include("./templates/footer.php"); ?>

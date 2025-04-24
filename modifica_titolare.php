@@ -1,17 +1,13 @@
 <?php
 include_once("./templates/header_riservata.php");
 ?>
-<div id="menusx">
-        <div>
-            <?php
-                echo "<div><button type=\"button\" onClick=\"location.href='./home.php'\" class=\"buttonform menubutton\">RITORNA ALLA HOME</button></div>";
-                //echo "<div><button type=\"button\" onClick=\"location.href='./visualizza_animali.php'\" class=\"buttonform menubutton\">RITORNA ALLA VISTA ANIMALI</button></div>";
-            ?>
-        </div>
-</div>
-<div id="central" style="width: 100%; text-align: center;">
+
+<div class="container mt-5">
+    <div class="mb-4">
+        <a href="./home.php" class="btn btn-secondary">Ritorna alla Home</a>
+    </div>
+
     <?php
-        //devo ricevere l'id del titolare del caseificio tramite GET
         $id_t = $_GET['id_t'];
         require("./conf/db_config.php");
         $stmt = $conn->prepare("SELECT * FROM TITOLARI WHERE id_t = ?");
@@ -19,51 +15,55 @@ include_once("./templates/header_riservata.php");
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        //print_r($row);
         $conn->close();
-        echo '<p class="titolo_dark">Modifica i dati del titolare</p>';
     ?>
-    <form method="POST" action="./php/aggiorna_titolare.php">
-        <?php
-        echo '<input type="hidden" name="id_t" value="'.$id_t.'">'
-        ?>
-        <div style="margin-top: 20px">
-            <label for="nome">Nome:</label>
-            <?php
-            echo '<input type="text" name="nome" required value="'.$row['nome'].'"><br>'
-            ?>   
-        </div>
-        <div style="margin-top: 20px">
-            <label for="cognome">Cognome:</label>
-            <?php
-            echo '<input type="text" name="cognome" required value="'.$row['cognome'].'"><br>'
-            ?>   
-        </div>
-        <div style="margin-top: 20px">
-            <label for="email">Email:</label>
-            <?php
-            echo '<input type="email" name="email" required value="'.$row['email'].'"><br>'
-            ?>   
-        </div>
-        <div style="margin-top: 20px">
-            <label for="telefono">Telefono:</label>
-            <?php
-            echo '<input type="tel" name="telefono" required value="'.$row['telefono'].'"><br>'
-            ?>   
-        </div>
-        <div style="margin-top: 20px">
-            <input type="submit" value="Modifica titolare" class="buttonform">
-        </div>
-        <div style="margin-top: 20px">
-        <?php if (isset($_GET['msg'])){
-                    if ($_GET['msg']=='KO') echo "<p style=\"color: red\">ATTENZIONE! operazione non andata a buon fine!</p>";
-                    elseif ($_GET['msg']=='OK') echo "<p style=\"color: blue\">MODIFICATO! Operazione avvenuta con sucesso
-                                                      <br>ora puoi ritornare alla <a href=\"home.php\">HOME<a></p>";
-                  }        
-          ?>
-         </div>
-    </form>
+
+    <div class="card shadow p-4">
+        <h3 class="mb-4 text-center text-dark">Modifica i dati del titolare</h3>
+
+        <?php if (isset($_GET['msg'])): ?>
+            <?php if ($_GET['msg'] == 'KO'): ?>
+                <div class="alert alert-danger" role="alert">
+                    ATTENZIONE! Operazione non andata a buon fine!
+                </div>
+            <?php elseif ($_GET['msg'] == 'OK'): ?>
+                <div class="alert alert-success" role="alert">
+                    MODIFICATO! Operazione avvenuta con successo.
+                    <br>Ora puoi ritornare alla <a href="home.php" class="alert-link">HOME</a>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <form method="POST" action="./php/aggiorna_titolare.php" class="mx-auto" style="max-width: 500px;">
+            <input type="hidden" name="id_t" value="<?php echo $id_t; ?>">
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" name="nome" class="form-control" required value="<?php echo $row['nome']; ?>">
+            </div>
+
+            <div class="mb-3">
+                <label for="cognome" class="form-label">Cognome:</label>
+                <input type="text" name="cognome" class="form-control" required value="<?php echo $row['cognome']; ?>">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" class="form-control" required value="<?php echo $row['email']; ?>">
+            </div>
+
+            <div class="mb-4">
+                <label for="telefono" class="form-label">Telefono:</label>
+                <input type="tel" name="telefono" class="form-control" required value="<?php echo $row['telefono']; ?>">
+            </div>
+
+            <div class="text-center">
+                <input type="submit" value="Modifica titolare" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
 </div>
+
 <?php
-include ("./templates/footer.php");
+include("./templates/footer.php");
 ?>

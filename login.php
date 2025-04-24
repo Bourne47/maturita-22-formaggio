@@ -3,6 +3,7 @@ session_start();
 session_unset();
 session_destroy();
 
-include("./templates/login/header.php");
-include("./templates/login/login.php");
+include "./templates/header.php";
+include "./templates/login.php";
+include "./templates/footer.php";
 ?>

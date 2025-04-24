@@ -30,55 +30,49 @@ if (isset($_POST['submit_dati_latte'])) {
         $error_message = "Errore nell'aggiunta dei dati di produzione: " . $conn->error;
     }
 }
-
 ?>
 
-<?php 
-include './templates/header_ris.php';
-?>
+<?php include './templates/header_ris.php'; ?>
 
-<div class="container">
+<div class="container mt-5">
+    <?php include("./templates/navbar.php"); ?>
 
-   <?php include("./templates/navbar.php"); ?>
+    <h2 class="mb-4">Inserisci Dati Produzione - Caseificio: <span class="text-primary"><?php echo $nome_caseificio; ?></span></h2>
 
-    <div class="content">
-        <h2>INSERISCI DATI PRODUZIONE - CASEIFICIO: <?php echo $nome_caseificio; ?></h2>
-
-        <?php if(isset($success_message)): ?>
-            <div class="success-message"><?php echo $success_message; ?></div>
-        <?php endif; ?>
-        
-        <?php if(isset($error_message)): ?>
-            <div class="error-message"><?php echo $error_message; ?></div>
-        <?php endif; ?>
-
-        <h3>Inserisci dati di produzione del latte</h3>
-        <form method="POST" action="">
-            <div>
-                <label for="data">Data di produzione:</label>
-                <input type="date" name="data" required>
-            </div>
-            <div>
-                <label for="qt_lav">Quantità di latte lavorata (litri):</label>
-                <input type="number" name="qt_lav" step="0.01" required>
-            </div>
-            <div>
-                <label for="qt_prod">Quantità di latte per la produzione (litri):</label>
-                <input type="number" name="qt_prod" step="0.01" required>
-            </div>
-            <button type="submit" name="submit_dati_latte">Salva Dati Produzione</button>
-        </form>
-
-        <div style="margin-top: 20px;">
-            <a href="vis_dati_prod.php">
-                <button type="button">Visualizza Dati Produzione</button>
-            </a>
+    <?php if(isset($success_message)): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $success_message; ?>
         </div>
+    <?php endif; ?>
+
+    <?php if(isset($error_message)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $error_message; ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="card shadow-sm p-4 mb-5">
+        <h4 class="mb-3">Inserisci dati di produzione del latte</h4>
+        <form method="POST" action="">
+            <div class="mb-3">
+                <label for="data" class="form-label">Data di produzione:</label>
+                <input type="date" name="data" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="qt_lav" class="form-label">Quantità di latte lavorata (litri):</label>
+                <input type="number" name="qt_lav" step="0.01" class="form-control" required>
+            </div>
+            <div class="mb-4">
+                <label for="qt_prod" class="form-label">Quantità di latte per la produzione (litri):</label>
+                <input type="number" name="qt_prod" step="0.01" class="form-control" required>
+            </div>
+            <button type="submit" name="submit_dati_latte" class="btn btn-success">Salva Dati Produzione</button>
+        </form>
     </div>
+
+    <a href="vis_dati_prod.php" class="btn btn-outline-primary">Visualizza Dati Produzione</a>
 </div>
 
 <?php include './templates/footer.php'; ?>
 
-<?php
-$conn->close();
-?>
+<?php $conn->close(); ?>
