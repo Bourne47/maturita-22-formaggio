@@ -9,7 +9,7 @@ include_once("./templates/AreaRiservata/headerRiservata.php");
 
     <?php
         $id_t = $_GET['id_t'];
-        require("./conf/db_config.php");
+        require("./conf/dBconfig.php");
         $stmt = $conn->prepare("SELECT * FROM TITOLARI WHERE id_t = ?");
         $stmt->bind_param("i", $id_t);
         $stmt->execute();
