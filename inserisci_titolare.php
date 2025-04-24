@@ -1,4 +1,4 @@
-<?php include_once("./templates/header_riservata.php"); ?>
+<?php include_once("./templates/AreaRiservata/headerRiservata.php"); ?>
 
 <div class="container mt-5">
     <div class="mb-4">
