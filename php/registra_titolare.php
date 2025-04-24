@@ -5,7 +5,7 @@ if (!isset($_POST['nome'], $_POST['cognome'], $_POST['email'], $_POST['telefono'
     exit;
 }
 //con il require riporto il codice di connessione ad DB
-require("../conf/db_config.php");
+require("../conf/dBconfig.php");
 //PROCEDURA ESEGUIRE QUERY (rimando al materiale presente su classroom)
 $stmt = $conn->prepare("INSERT INTO TITOLARI (nome, cognome, email, telefono) VALUES (?, ?, ?, ?)"); //creo il nuovo titolare
 $stmt->bind_param("ssss", $_POST['nome'], $_POST['cognome'],$_POST['email'], $_POST['telefono']);
