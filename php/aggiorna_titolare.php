@@ -6,7 +6,7 @@ if (!isset($_POST['id_t'], $_POST['nome'], $_POST['cognome'], $_POST['email'], $
 }
 
 //con il require riporto il codice di connessione ad DB
-require("../conf/db_config.php");
+require("../conf/dBconfig.php");
 //PROCEDURA ESEGUIRE QUERY (rimando al materiale presente su classroom)
 $stmt = $conn->prepare("UPDATE TITOLARI
                     SET nome = ?, cognome = ?, email = ?, telefono = ?
