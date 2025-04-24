@@ -1,5 +1,5 @@
 <?php
-include_once("./templates/header_riservata.php");
+include_once("./templates/AreaRiservata/headerRiservata.php");
 ?>
 
 <div class="container mt-5">
@@ -28,9 +28,8 @@ include_once("./templates/header_riservata.php");
             <div class="mb-3">
                 <label for="id_t" class="form-label">Titolare:</label>
                 <select name="id_t" class="form-select" required>
-                    <option value="">-- Seleziona un titolare --</option>
                     <?php
-                    require("./conf/db_config.php");
+                    require("./conf/dBconfig.php");
                     $stmt = $conn->prepare("SELECT id_t, nome, cognome, email, telefono FROM TITOLARI ORDER BY cognome, nome");
                     $stmt->execute();
                     $result = $stmt->get_result();
