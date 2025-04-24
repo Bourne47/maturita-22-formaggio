@@ -5,7 +5,7 @@ if (!isset($_POST['id_t'], $_SESSION['id_c'])) {
     exit;
 }
 //con il require riporto il codice di connessione ad DB
-require("../conf/db_config.php");
+require("../conf/dBconfig.php");
 //PROCEDURA ESEGUIRE QUERY (rimando al materiale presente su classroom)
 $stmt = $conn->prepare("UPDATE CASEIFICI
                     SET id_t = ?
